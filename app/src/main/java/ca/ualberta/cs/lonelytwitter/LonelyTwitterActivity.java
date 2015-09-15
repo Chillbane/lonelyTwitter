@@ -23,10 +23,27 @@ public class LonelyTwitterActivity extends Activity {
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
 	private ListView oldTweetsList;
+
+	// ArrayList:
+	// <> specify what its a list of
+	/* ImportantTweet is a subclass of Tweet -> anything that is a Tweet can be treated as an
+	 * ImportantTweet
+	 */
+	private ArrayList<Tweet> tweetList;
 	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Tweetable tweet;
+
+		try {
+			tweet = new ImportantTweet("Longer than 140 characters");
+		}catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		tweet.isImportant();
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
