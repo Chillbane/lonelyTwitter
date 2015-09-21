@@ -1,7 +1,9 @@
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by cbli on 9/14/15.\
@@ -12,7 +14,7 @@ import java.util.Date;
 public abstract class Tweet {
     protected String text;
     private Date date;
-    private String[] moodList = new String[20];
+    List<String> moodList = new ArrayList<String>();
 
     public Tweet(String text, Date date) {
         //implied: super() -> takes no attributes
