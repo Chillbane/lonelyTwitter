@@ -12,6 +12,7 @@ import java.util.Date;
 public abstract class Tweet {
     protected String text;
     private Date date;
+    private String[] moodList = new String[20];
 
     public Tweet(String text, Date date) {
         //implied: super() -> takes no attributes

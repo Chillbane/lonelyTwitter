@@ -15,7 +15,7 @@ public class EnergeticMood extends CurrentMood {
         super(date);
     }
 
-    public String returnMessage() {
-        return "Ready for a marathon.";
+    public String returnMood() {
+        return "Energetic";
     }
 }

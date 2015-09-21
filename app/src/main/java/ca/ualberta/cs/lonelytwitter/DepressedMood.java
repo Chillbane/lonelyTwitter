@@ -15,7 +15,7 @@ public class DepressedMood extends CurrentMood {
         super(date);
     }
 
-    public String returnMessage() {
-       return "Shoveling down ice cream.";
+    public String returnMood() {
+       return "Depressed";
     }
 }

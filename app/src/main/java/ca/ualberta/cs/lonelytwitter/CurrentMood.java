@@ -24,5 +24,5 @@ public abstract class CurrentMood {
         this.date = date;
     }
 
-    public abstract String returnMessage();
+    public abstract String returnMood();
 }
