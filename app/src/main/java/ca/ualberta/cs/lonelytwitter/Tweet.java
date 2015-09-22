@@ -1,52 +1,35 @@
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
- * Created by cbli on 9/14/15.\
- *
- * Don't want to allow someone to go tweet.text = ""  -> force them to call a method instead
+ * Created by joshua2 on 9/16/15.
  */
-// Implied: public class Tweet extends Object
-public abstract class Tweet {
-    protected String text;
-    private Date date;
-    List<String> moodList = new ArrayList<String>();
+public abstract class Tweet extends Object implements Tweetable {
+    private String text;
+    protected Date date;
 
-    public Tweet(String text, Date date) {
-        //implied: super() -> takes no attributes
-
-        // this.text refers to text attribute declared above
-        // text refers to text variable in argument
-        this.text = text;
+    public Tweet(String tweet, Date date) throws TweetTooLongException {
+        this.setText(tweet);
         this.date = date;
     }
 
-    public Tweet(String text) {
-        this.text = text;
-        // don't need to do this.date b/c no date variable in argument
-        date = new Date(); // make new Date object by calling its constructor (default: current date)
+    public Tweet(String tweet) throws TweetTooLongException {
+        this.setText(tweet);
+        this.date = new Date();
     }
 
     public String getText() {
         return text;
     }
 
-    /* dot operator:
-     *  - x.y in java is basically x-> in C
-     */
-
-    public void setText(String text) throws IOException {
-        // limit tweet to 140 characters
+    public void setText(String text) throws TweetTooLongException {
         if (text.length() <= 140) {
             this.text = text;
         } else {
-            throw new IOException("Tweet was too long!");
+            throw new TweetTooLongException();
         }
-        this.text = text;
     }
 
     public Date getDate() {
@@ -57,7 +40,11 @@ public abstract class Tweet {
         this.date = date;
     }
 
-    // every kind of tweet needs to have an isImportant, but we don't know what the method does
-    // until told what class it is
     public abstract Boolean isImportant();
+
+    @Override
+    public String toString() {
+        return date.toString() + "|" + text;
+    }
+
 }
