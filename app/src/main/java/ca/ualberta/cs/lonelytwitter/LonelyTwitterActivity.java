@@ -24,7 +24,8 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class LonelyTwitterActivity extends Activity {
+// make it observable -> implement MyObserver
+public class LonelyTwitterActivity extends Activity implements MyObserver {
 
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
@@ -48,23 +49,24 @@ public class LonelyTwitterActivity extends Activity {
 
 			public void onClick(View v) {
 				setResult(RESULT_OK);
-				String text = bodyText.getText().toString();
-				tweets.add(new NormalTweet(text));
-				saveInFile();
-				adapter.notifyDataSetChanged();
+				String text = bodyText.getText().toString(); // move to conroller
+				tweets.add(new NormalTweet(text)); // move to conroller
+				saveInFile(); // move to model
+				adapter.notifyDataSetChanged(); //view
 			}
 		});
 	}
 
+	// GSON = Model
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		loadFromFile();
+		loadFromFile(); //move to model
 		if (tweets == null) {
 			throw new RuntimeException();
 		}
-		adapter = new ArrayAdapter<Tweet>(this, R.layout.list_item, tweets);
+		adapter = new ArrayAdapter<Tweet>(this, R.layout.list_item, tweets); // somewhere b/t model and view
 		oldTweetsList.setAdapter(adapter);
 	}
 
@@ -98,5 +100,11 @@ public class LonelyTwitterActivity extends Activity {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	// View
+	public void myNotify(MyObservable observable) {
+		// LonelyTwitterActivity observer called
+		adapter.notifyDataSetChanged();
 	}
 }
