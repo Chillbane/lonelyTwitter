@@ -27,6 +27,7 @@ public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2 
         Activity activity = getActivity();
     }
 
+    // test we can edit a tweet
     public void testEditTweet() {
         LonelyTwitterActivity activity = (LonelyTwitterActivity) getActivity();
 
@@ -82,18 +83,22 @@ public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2 
         // Remove the ActivityMonitor
         getInstrumentation().removeMonitor(receiverActivityMonitor);
 
+
         // test that the tweet editor starts up with the correct tweet
-
-        // test that we can edit a tweet
-
-        // test that we can push a save button for the edited tweet
 
         // test that the modified tweet was saved
 
+
         // test that the modified tweet is in the tweet list
+
+
 
         receiverActivity.finish(); // close activity test is good!
     }
+
+    // test that the tweet editor starts up with the correct tweet
+
+
 
 
 
